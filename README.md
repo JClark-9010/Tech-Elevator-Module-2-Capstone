@@ -1,10 +1,16 @@
-# Module 2 Capstone - TEnmo
+# Capstone
+### Created a command line client/server payment service application in a pair programming setting using MS SQL, ASP.NET, and JSON web tokens (JWT), and Postman. Emphasized OOP, MVC design pattern, REST,  data security, and prevention of SQL injection.
+
+
+
+
+## Module 2 Capstone - TEnmo
 
 Congratulations—you've landed a job with TEnmo, whose product is an online payment service for transferring "TE bucks" between friends. However, they don't have a product yet. You've been tasked with writing a RESTful API server and command-line application.
 
-## Use cases
+### Use cases
 
-### Required use cases
+#### Required use cases
 
 You should attempt to complete all of the following required use cases.
 
@@ -27,7 +33,7 @@ You should attempt to complete all of the following required use cases.
 5. As an authenticated user of the system, I need to be able to see transfers I have sent or received.
 6. As an authenticated user of the system, I need to be able to retrieve the details of any transfer based upon the transfer ID.
 
-### Optional use cases
+#### Optional use cases
 
 If you complete all of the required use cases and are looking for additional challenge, complete as many of the following optional use cases as you can.
 
@@ -47,14 +53,14 @@ If you complete all of the required use cases and are looking for additional cha
    4. If the transfer is approved, the requestee's account balance is decreased by the amount of the request.
    5. If the transfer is rejected, no account balance changes.
 
-## Sample screens
+### Sample screens
 
-### Use case 3: Current balance
+#### Use case 3: Current balance
 ```
 Your current account balance is: $9999.99
 ```
 
-### Use case 4: Send TE Bucks
+#### Use case 4: Send TE Bucks
 ```
 Please choose an option: 4
 |-------------- Users --------------|
@@ -67,7 +73,7 @@ Id of the user you are sending to[0]: 1003
 Enter amount to send: 75.74
 ```
 
-### Use case 5: View transfers
+#### Use case 5: View transfers
 ```
 -------------------------------------------
 Transfers
@@ -79,7 +85,7 @@ ID          From/To                 Amount
 Please enter transfer ID to view details (0 to cancel): "
 ```
 
-### Use case 6: Transfer details
+#### Use case 6: Transfer details
 ```
 --------------------------------------------
 Transfer Details
@@ -92,7 +98,7 @@ Transfer Details
  Amount: $903.14
 ```
 
-### Use case 7: Requesting TE Bucks
+#### Use case 7: Requesting TE Bucks
 ```
 Please choose an option: 5
 |-------------- Users --------------|
@@ -105,7 +111,7 @@ Id of the user you are requesting from[0]: 1002
 Enter amount to request: 39.99
 ```
 
-### Use case 8: Pending requests
+#### Use case 8: Pending requests
 ```
 -------------------------------------------
 Pending Transfers
@@ -117,7 +123,7 @@ ID          To                     Amount
 Please enter transfer ID to approve/reject (0 to cancel): "
 ```
 
-### Use case 9: Approve or reject pending transfer
+#### Use case 9: Approve or reject pending transfer
 ```
 1: Approve
 2: Reject
@@ -126,11 +132,11 @@ Please enter transfer ID to approve/reject (0 to cancel): "
 Please choose an option:
 ```
 
-## Database schema
+### Database schema
 
 ![Database schema](./img/Tenmo_erd.png)
 
-### `tenmo_user` table
+#### `tenmo_user` table
 
 ---
 
@@ -143,7 +149,7 @@ Stores the login information for users of the system.
 | `password_hash` | Hashed version of the user's password                                          |
 | `salt`          | String that helps hash the password                                            |
 
-### `account` table
+#### `account` table
 
 ---
 
@@ -155,7 +161,7 @@ Stores the accounts of users in the system.
 | `user_id`       | Foreign key to the `users` table; identifies user who owns account |
 | `balance`       | The amount of TE bucks currently in the account                    |
 
-### `transfer_type` table
+#### `transfer_type` table
 
 ---
 
@@ -173,7 +179,7 @@ There are two types of transfers:
 | 1                  | Request              | Identifies transfer where a user requests money from another user      |
 | 2                  | Send                 | Identifies transfer where a user sends money to another user           |
 
-### `transfer_status` table
+#### `transfer_status` table
 
 ---
 
@@ -192,7 +198,7 @@ There are three statuses of transfers:
 | 2                    | Approved               | Identifies transfer that has been approved and occurred                                |
 | 3                    | Rejected               | Identifies transfer that wasn't approved                                               |
 
-### `transfer` table
+#### `transfer` table
 
 ---
 
@@ -209,11 +215,11 @@ Stores the transfers of TE bucks.
 
 > Note: there are two check constraints in the DDL that creates the `transfer` table. Be sure to take a look at `tenmo.sql` to understand these constraints.
 
-## How to set up the database
+### How to set up the database
 
 In the database folder, you'll find the database creation script `tenmo.sql`. Open this in SQL Server Management Studio and execute it.
 
-## Authentication
+### Authentication
 
 The user registration and authentication functionality for the system has already been implemented. If you review the login code in `TenmoApp.cs`, you'll notice that after a successful authentication, the user is stored in `AuthenticatedApiService`, which is a base class for any API service that needs authentication. `TenmoApiService` derives from `AuthenticatedApiService`. At the same time the user is stored, the token is also stored in the `IRestClient` in that class.
 
@@ -223,6 +229,6 @@ The user registration and authentication functionality for the system has alread
 * `Username` is a string which holds the user's name (when `IsLoggedIn == true`).
 
 
-## Set startup projects
+### Set startup projects
 
 Since both the client and server applications are included in the solution, you'll have to configure the solution to run both projects simultaneously. In Visual Studio, right-click the solution and select **Set Startup Projects...**. In the window that appears, select **Multiple startup projects** and set both "TenmoClient" and "TenmoServer" to have the action `Start`.
